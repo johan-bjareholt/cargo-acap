@@ -203,7 +203,12 @@ impl<'a> BuildOp<'a> {
 
         // write required contents
         {
-            let content_to_copy = vec![(".", "data"), ("tools", "tools"), ("html", "html")];
+            let content_to_copy = vec![
+                (".", "data"),
+                ("html", "html"),
+                ("lib", "lib"),
+                ("tools", "tools"),
+            ];
             for (content_path, content_src_path) in content_to_copy {
                 match tar.append_dir_all(content_path, content_src_path) {
                     Ok(_) => (),
