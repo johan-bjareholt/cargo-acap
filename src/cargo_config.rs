@@ -49,5 +49,5 @@ pub struct CargoAcapMetadata {
 
     /// A list of other files and/or directories to be included in the package.
     /// Files listed here will be copied to the application directory during installation.
-    pub other_files: Vec<String>,
+    pub other_files: Option<Vec<String>>,
 }
