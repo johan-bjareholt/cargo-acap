@@ -150,13 +150,15 @@ impl PackageDotConf {
             license_check_arguments,
             start_mode,
             targets: _,
+            settings_page_file,
             required_embedded_development_version,
         } = acap_metadata;
 
         let app_name = app_name.unwrap_or_else(|| package.name().to_string());
         let display_name = display_name.unwrap_or_else(|| package.name().to_string());
         let menu_name = menu_name.unwrap_or_else(|| display_name.clone());
-        let required_embedded_development_version = required_embedded_development_version.unwrap_or_else(|| "2.0".to_string());
+        let required_embedded_development_version =
+            required_embedded_development_version.unwrap_or_else(|| "2.0".to_string());
 
         let vendor = vendor.unwrap_or_else(|| format!("{} authors", &display_name));
 
@@ -208,10 +210,10 @@ impl PackageDotConf {
             app_major_version,
             app_minor_version,
             app_micro_version,
+            settings_page_file,
             other_files: vec![],
             license_page,
             license_check_arguments,
-            settings_page_file: None,
             settings_page_text: None,
             vendor_homepage_link,
             http_cgi_paths: None,

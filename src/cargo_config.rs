@@ -43,4 +43,7 @@ pub struct CargoAcapMetadata {
     /// Specifies the minimum required SDK version that the product running the
     /// application must support.
     pub required_embedded_development_version: Option<String>,
+
+    /// Specifies the file to use for a custom Settings page.
+    pub settings_page_file: Option<String>,
 }
