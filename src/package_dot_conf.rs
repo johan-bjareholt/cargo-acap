@@ -150,6 +150,7 @@ impl PackageDotConf {
             license_check_arguments,
             start_mode,
             targets: _,
+            other_files,
             settings_page_file,
             required_embedded_development_version,
         } = acap_metadata;
@@ -211,7 +212,7 @@ impl PackageDotConf {
             app_minor_version,
             app_micro_version,
             settings_page_file,
-            other_files: vec![],
+            other_files,
             license_page,
             license_check_arguments,
             settings_page_text: None,
