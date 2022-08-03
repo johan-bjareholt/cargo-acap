@@ -212,7 +212,7 @@ impl PackageDotConf {
             app_minor_version,
             app_micro_version,
             settings_page_file,
-            other_files,
+            other_files: other_files.unwrap_or_default(),
             license_page,
             license_check_arguments,
             settings_page_text: None,
