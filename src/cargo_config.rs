@@ -50,4 +50,10 @@ pub struct CargoAcapMetadata {
     /// A list of other files and/or directories to be included in the package.
     /// Files listed here will be copied to the application directory during installation.
     pub other_files: Option<Vec<String>>,
+
+    /// The UNIX user in which to run the application. `"sdk"` is the recommended value.
+    pub unix_user: Option<String>,
+
+    /// The UNIX group in which to run the application. `"sdk"` is the recommended value.
+    pub unix_group: Option<String>,
 }
