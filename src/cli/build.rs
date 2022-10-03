@@ -2,8 +2,8 @@ use crate::cli::Invocation;
 use crate::package_dot_conf::PackageDotConf;
 use crate::target::Target;
 use clap::Parser;
-use std::io::Write;
 use std::fs::File;
+use std::io::Write;
 use std::path::{Path, PathBuf};
 use std::time::SystemTime;
 
@@ -201,19 +201,23 @@ impl<'a> BuildOp<'a> {
             )?;
         }
 
-        // write "otherfiles"
+        // write required contents
         {
-            // TODO: the "otherfiles" folder is only intended for static files.
-            // Since it might be of interest to also copy built files such as
-            // .so files, we should also provide another folder to copy from
-            // for those files.
-            match tar.append_dir_all(".", "otherfiles") {
-                Ok(_) => (),
-                Err(e) => {
-                    if e.kind() == std::io::ErrorKind::NotFound {
-                        // ignore
-                    } else {
-                        return Err(e);
+            let content_to_copy = vec![
+                (".", "data"),
+                ("html", "html"),
+                ("tools", "tools"),
+                ("lib", "lib"),
+            ];
+            for (content_path, content_src_path) in content_to_copy {
+                match tar.append_dir_all(content_path, content_src_path) {
+                    Ok(_) => (),
+                    Err(e) => {
+                        if e.kind() == std::io::ErrorKind::NotFound {
+                            // ignore
+                        } else {
+                            return Err(e);
+                        }
                     }
                 }
             }
@@ -224,7 +228,7 @@ impl<'a> BuildOp<'a> {
             match File::open("postinstall.sh") {
                 Ok(mut f) => {
                     tar.append_file("postinstall.sh", &mut f)?;
-                },
+                }
                 Err(e) => {
                     if e.kind() == std::io::ErrorKind::NotFound {
                         // ignore

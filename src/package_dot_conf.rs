@@ -150,6 +150,10 @@ impl PackageDotConf {
             license_check_arguments,
             start_mode,
             targets: _,
+            other_files,
+            settings_page_file,
+            unix_user,
+            unix_group,
             required_embedded_development_version,
         } = acap_metadata;
 
@@ -163,7 +167,11 @@ impl PackageDotConf {
 
         let display_name = display_name.unwrap_or_else(|| package.name().to_string());
         let menu_name = menu_name.unwrap_or_else(|| display_name.clone());
-        let required_embedded_development_version = required_embedded_development_version.unwrap_or_else(|| "2.0".to_string());
+        let required_embedded_development_version =
+            required_embedded_development_version.unwrap_or_else(|| "2.0".to_string());
+
+        let unix_user = unix_user.unwrap_or("sdk".to_string());
+        let unix_group = unix_group.unwrap_or("sdk".to_string());
 
         let vendor = vendor.unwrap_or_else(|| format!("{} authors", &display_name));
 
@@ -215,17 +223,17 @@ impl PackageDotConf {
             app_major_version,
             app_minor_version,
             app_micro_version,
-            other_files: vec![],
+            settings_page_file,
+            other_files: other_files.unwrap_or_default(),
             license_page,
             license_check_arguments,
-            settings_page_file: None,
             settings_page_text: None,
             vendor_homepage_link,
             http_cgi_paths: None,
             post_install_script: "postinstall.sh".to_string(),
             required_embedded_development_version,
-            unix_user: "sdk".to_string(),
-            unix_group: "sdk".to_string(),
+            unix_user,
+            unix_group,
             start_mode,
         }
     }

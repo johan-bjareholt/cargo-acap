@@ -43,4 +43,17 @@ pub struct CargoAcapMetadata {
     /// Specifies the minimum required SDK version that the product running the
     /// application must support.
     pub required_embedded_development_version: Option<String>,
+
+    /// Specifies the file to use for a custom Settings page.
+    pub settings_page_file: Option<String>,
+
+    /// A list of other files and/or directories to be included in the package.
+    /// Files listed here will be copied to the application directory during installation.
+    pub other_files: Option<Vec<String>>,
+
+    /// The UNIX user in which to run the application. `"sdk"` is the recommended value.
+    pub unix_user: Option<String>,
+
+    /// The UNIX group in which to run the application. `"sdk"` is the recommended value.
+    pub unix_group: Option<String>,
 }
